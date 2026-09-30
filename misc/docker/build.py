@@ -10,7 +10,7 @@ Run with "--pull" to force update of the Linux (Ubuntu) base image.
 
 After you've built the container, use "run.sh" to run tests. Example:
 
-  misc/docker/run.sh pytest mypyc/
+  misc/docker/run.sh pytest mypycxazr/
 """
 
 import argparse

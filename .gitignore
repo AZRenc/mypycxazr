@@ -6,7 +6,7 @@ __pycache__
 /env*/
 docs/build/
 docs/source/_build
-mypyc/doc/_build
+mypycxazr/doc/_build
 *.iml
 /out/
 .venv*
@@ -58,5 +58,5 @@ test_capi
 *.o
 *.a
 test_capi
-/mypyc/lib-rt/build/
-/mypyc/lib-rt/*.so
+/mypycxazr/lib-rt/build/
+/mypycxazr/lib-rt/*.so

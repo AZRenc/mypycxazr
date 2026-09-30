@@ -16,8 +16,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mypy"
-description = "Optional static typing for Python"
+name = "mypycxazr"
+description = "Mypy plus MyPyC-Protect: a mypyc fork with an optional release-protection layer"
 readme = {text = """
 Mypy -- Optional Static Typing for Python
 =========================================
@@ -67,7 +67,7 @@ faster-cache = ["orjson"]
 [project.urls]
 Homepage = "https://www.mypy-lang.org/"
 Documentation = "https://mypy.readthedocs.io/en/stable/index.html"
-Repository = "https://github.com/python/mypy"
+Repository = "https://github.com/mypycxazr/mypycxazr"
 Changelog = "https://github.com/python/mypy/blob/master/CHANGELOG.md"
 Issues = "https://github.com/python/mypy/issues"
 
@@ -76,11 +76,11 @@ mypy = "mypy.__main__:console_entry"
 stubgen = "mypy.stubgen:main"
 stubtest = "mypy.stubtest:main"
 dmypy = "mypy.dmypy.client:console_entry"
-mypyc = "mypyc.__main__:main"
+mypycxazr = "mypycxazr.__main__:main"
 
 [tool.setuptools.packages.find]
-include = ["mypy*", "mypyc*", "*__mypyc*"]
-exclude = ["mypyc.test-data*"]
+include = ["mypy*", "mypycxazr*", "*__mypyc*"]
+exclude = ["mypycxazr.test-data*"]
 namespaces = false
 
 [tool.setuptools.package-data]
@@ -94,7 +94,7 @@ mypy = [
   "xml/*.css",
 ]
 [tool.setuptools.exclude-package-data]
-mypyc = [
+mypycxazr = [
   "README.md",
   "doc/**",
   "external/**",
@@ -109,7 +109,7 @@ target-version = ["py39", "py310", "py311", "py312", "py313"]
 skip-magic-trailing-comma = true
 force-exclude = '''
 ^/mypy/typeshed|
-^/mypyc/test-data|
+^/mypycxazr/test-data|
 ^/test-data
 '''
 
@@ -122,11 +122,11 @@ extend-exclude = [
   "@*",
   # Sphinx configuration is irrelevant
   "docs/source/conf.py",
-  "mypyc/doc/conf.py",
+  "mypycxazr/doc/conf.py",
   # tests have more relaxed styling requirements
   # fixtures have their own .pyi-specific configuration
   "test-data/*",
-  "mypyc/test-data/*",
+  "mypycxazr/test-data/*",
   # typeshed has its own .pyi-specific configuration
   "mypy/typeshed/*",
 ]
@@ -198,7 +198,7 @@ ignore = ["**/.readthedocs.yaml"]
 
 [tool.pytest.ini_options]
 minversion = "7.0.0"
-testpaths = ["mypy/test", "mypyc/test"]
+testpaths = ["mypy/test", "mypycxazr/test", "tests"]
 python_files = 'test*.py'
 
 # Where do the test cases come from?  We provide our own collection

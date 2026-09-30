@@ -30,7 +30,7 @@ def perform_type_check(target_dir: str, code: str | None) -> None:
     args = []
     if code is None:
         args.extend(["--config-file", "mypy_self_check.ini"])
-        for pat in "mypy/*.py", "mypy/*/*.py", "mypyc/*.py", "mypyc/test/*.py":
+        for pat in "mypy/*.py", "mypy/*/*.py", "mypycxazr/*.py", "mypycxazr/test/*.py":
             args.extend(glob.glob(pat))
     else:
         args.extend(["-c", code])

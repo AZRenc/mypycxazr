@@ -23,7 +23,7 @@ from typing import Any
 from urllib.request import urlopen
 
 BASE = "https://api.github.com/repos"
-REPO = "mypyc/mypy_mypyc-wheels"
+REPO = "mypycxazr/mypy_mypyc-wheels"
 
 
 def is_whl_or_tar(name: str) -> bool:

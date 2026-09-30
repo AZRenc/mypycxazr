@@ -1,0 +1,68 @@
+"""Runner for IR optimization tests."""
+
+from __future__ import annotations
+
+import os.path
+
+from mypy.errors import CompileError
+from mypy.test.config import test_temp_dir
+from mypy.test.data import DataDrivenTestCase
+from mypycxazr.common import TOP_LEVEL_NAME
+from mypycxazr.ir.func_ir import FuncIR
+from mypycxazr.ir.pprint import format_func
+from mypycxazr.options import CompilerOptions
+from mypycxazr.test.testutil import (
+    ICODE_GEN_BUILTINS,
+    MypycDataSuite,
+    assert_test_output,
+    build_ir_for_single_file,
+    remove_comment_lines,
+    use_custom_builtins,
+)
+from mypycxazr.transform.copy_propagation import do_copy_propagation
+from mypycxazr.transform.flag_elimination import do_flag_elimination
+from mypycxazr.transform.uninit import insert_uninit_checks
+
+
+class OptimizationSuite(MypycDataSuite):
+    """Base class for IR optimization test suites.
+
+    To use this, add a base class and define "files" and "do_optimizations".
+    """
+
+    base_path = test_temp_dir
+
+    def run_case(self, testcase: DataDrivenTestCase) -> None:
+        with use_custom_builtins(os.path.join(self.data_prefix, ICODE_GEN_BUILTINS), testcase):
+            expected_output = remove_comment_lines(testcase.output)
+            try:
+                ir = build_ir_for_single_file(testcase.input)
+            except CompileError as e:
+                actual = e.messages
+            else:
+                actual = []
+                for fn in ir:
+                    if fn.name == TOP_LEVEL_NAME and not testcase.name.endswith("_toplevel"):
+                        continue
+                    insert_uninit_checks(fn)
+                    self.do_optimizations(fn)
+                    actual.extend(format_func(fn))
+
+            assert_test_output(testcase, actual, "Invalid source code output", expected_output)
+
+    def do_optimizations(self, fn: FuncIR) -> None:
+        raise NotImplementedError
+
+
+class TestCopyPropagation(OptimizationSuite):
+    files = ["opt-copy-propagation.test"]
+
+    def do_optimizations(self, fn: FuncIR) -> None:
+        do_copy_propagation(fn, CompilerOptions())
+
+
+class TestFlagElimination(OptimizationSuite):
+    files = ["opt-flag-elimination.test"]
+
+    def do_optimizations(self, fn: FuncIR) -> None:
+        do_flag_elimination(fn, CompilerOptions())

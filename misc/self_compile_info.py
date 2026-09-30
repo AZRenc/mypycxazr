@@ -6,7 +6,7 @@ from typing import Any
 
 import setuptools
 
-import mypyc.build
+import mypycxazr.build
 
 
 class FakeExtension:
@@ -32,7 +32,7 @@ def main() -> None:
     parser.parse_args()
 
     # Prepare fake state for running setup.py.
-    mypyc.build.mypycify = fake_mypycify  # type: ignore[assignment]
+    mypycxazr.build.mypycify = fake_mypycify  # type: ignore[assignment]
     setuptools.Extension = FakeExtension  # type: ignore[misc, assignment]
     setuptools.setup = fake_setup
     sys.argv = [sys.argv[0], "--use-mypyc"]

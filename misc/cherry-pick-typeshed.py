@@ -36,7 +36,7 @@ def main() -> None:
     if not re.match("[0-9a-fA-F]+$", commit):
         sys.exit(f"error: Invalid commit {commit!r}")
 
-    if not os.path.exists("mypy") or not os.path.exists("mypyc"):
+    if not os.path.exists("mypy") or not os.path.exists("mypycxazr"):
         sys.exit("error: This script must be run at the mypy repository root directory")
 
     with tempfile.TemporaryDirectory() as d:

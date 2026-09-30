@@ -1,4 +1,4 @@
-exclude: '^(mypyc/external/)|(mypy/typeshed/)|misc/typeshed_patches'  # Exclude all vendored code from lints
+exclude: '^(mypycxazr/external/)|(mypy/typeshed/)|misc/typeshed_patches'  # Exclude all vendored code from lints
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -27,7 +27,7 @@ repos:
       - id: codespell
         args:
           - --ignore-words-list=HAX,ccompiler,ot,statics,whet,zar
-        exclude: ^(mypy/test/|mypy/typeshed/|mypyc/test-data/|test-data/).+$
+        exclude: ^(mypy/test/|mypy/typeshed/|mypycxazr/test-data/|test-data/).+$
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.7
     hooks:

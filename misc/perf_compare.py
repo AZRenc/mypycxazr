@@ -183,7 +183,7 @@ def main() -> None:
     code: str | None = args.c
     foreign_repo: str | None = args.r
 
-    if not (os.path.isdir(".git") and os.path.isdir("mypyc")):
+    if not (os.path.isdir(".git") and os.path.isdir("mypycxazr")):
         sys.exit("error: You must run this script from the mypy repo root")
 
     target_dirs = []

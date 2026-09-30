@@ -8,7 +8,7 @@ on:
     - '**/*.rst'
     - '**/*.md'
     - 'misc/**'
-    - 'mypyc/**'
+    - 'mypycxazr/**'
     - 'mypy/stubtest.py'
     - 'mypy/stubgen.py'
     - 'mypy/stubgenc.py'

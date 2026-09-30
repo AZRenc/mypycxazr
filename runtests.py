@@ -63,7 +63,7 @@ cmds = {
         "-p",
         "mypy",
         "-p",
-        "mypyc",
+        "mypycxazr",
     ],
     # Type check setup.py as well
     "self-packaging": [
@@ -92,7 +92,7 @@ cmds = {
         "-k",
         " or ".join([DAEMON, MYPYC_EXTERNAL, MYPYC_COMMAND_LINE, ERROR_STREAM]),
     ],
-    "mypyc-fast": ["pytest", "-q", "mypyc", "-k", f"not ({' or '.join(MYPYC_SLOW)})"],
+    "mypyc-fast": ["pytest", "-q", "mypycxazr", "-k", f"not ({' or '.join(MYPYC_SLOW)})"],
     # Test cases that might take minutes to run
     "pytest-extra": ["pytest", "-q", "-k", " or ".join(PYTEST_OPT_IN)],
     # Mypyc tests that aren't run by default, since they are slow and rarely

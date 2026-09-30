@@ -95,13 +95,13 @@ if USE_MYPYC:
         )
     ) + (
         # Don't want to grab this accidentally
-        os.path.join("mypyc", "lib-rt", "setup.py"),
+        os.path.join("mypycxazr", "lib-rt", "setup.py"),
         # Uses __file__ at top level https://github.com/mypyc/mypyc/issues/700
-        os.path.join("mypyc", "__main__.py"),
+        os.path.join("mypycxazr", "__main__.py"),
     )
 
     everything = [os.path.join("mypy", x) for x in find_package_data("mypy", ["*.py"])] + [
-        os.path.join("mypyc", x) for x in find_package_data("mypyc", ["*.py"], root="mypyc")
+        os.path.join("mypycxazr", x) for x in find_package_data("mypycxazr", ["*.py"], root="mypycxazr")
     ]
     # Start with all the .py files
     all_real_pys = [
@@ -116,9 +116,9 @@ if USE_MYPYC:
         if not x.startswith(
             (
                 os.path.join("mypy", "test") + os.sep,
-                os.path.join("mypyc", "test") + os.sep,
-                os.path.join("mypyc", "doc") + os.sep,
-                os.path.join("mypyc", "test-data") + os.sep,
+                os.path.join("mypycxazr", "test") + os.sep,
+                os.path.join("mypycxazr", "doc") + os.sep,
+                os.path.join("mypycxazr", "test-data") + os.sep,
             )
         )
     ]
@@ -140,7 +140,7 @@ if USE_MYPYC:
         del sys.modules["mypy.git"]
         sys.path.insert(0, use_other_mypyc)
 
-    from mypyc.build import mypycify
+    from mypycxazr.build import mypycify
 
     opt_level = os.getenv("MYPYC_OPT_LEVEL", "3")
     debug_level = os.getenv("MYPYC_DEBUG_LEVEL", "1")
